@@ -61,7 +61,7 @@ void main()
 	cout << "\ninsert\nvector -->\t";
 	//выводим содержимое векртора на экран 
 	//используя обычный итератор
-	for (vector<int>::iterator i = vect.begin(); i != vect.end(); ++i)
+	for (auto i = vect.begin(); i != vect.end(); ++i)
 	{
 		cout << *(i) << '\t';
 	}
@@ -89,10 +89,10 @@ void main()
 	}
 
 	vect.erase(vect.begin(), vect.begin() + 2); // erase 3 el from first position
-	for (int i : vect) cout << i << "\t";
+	for (int i : vect) cout << i << "\t"; cout << endl;
 
 	vect.erase(vect.begin()); // erase first
-	for (int i : vect) cout << i << "\t";
+	for (int i : vect) cout << i << "\t"; cout << endl;
 
 	cout << "First element: " << vect.front() << endl;
 	cout << "Last element: " << vect.back() << endl;
@@ -101,8 +101,8 @@ void main()
 	//vect.swap(/*another vector*/);
 
 	// initialize
-	vect.assign({ 5, 5, 5 });
-	for (int i : vect) cout << i << "\t";
+	vect.assign({ 7, 3, 9 });
+	for (int i : vect) cout << i << "\t"; cout << endl;
 
 	cout << "Size: " << vect.size() << endl;
 	cout << "Cap: " << vect.capacity() << endl;
@@ -111,6 +111,7 @@ void main()
 	cout << "Cap: " << vect.capacity() << endl;
 
 	sort(vect.begin(), vect.end());
+	for (int i : vect) cout << i << "\t"; cout << endl;
 
 	system("pause");
 }
