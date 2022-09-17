@@ -37,7 +37,7 @@ void PrintVector(vector<int> v)
 
 int main()
 {
-	vector<int> v = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 7 };
+	vector<int> v = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 	vector<int> v2 = { 10, 11, 12, 13 };
 
 	for (int i = 0; i < v.size(); i++)
@@ -47,13 +47,16 @@ int main()
 	cout << endl;
 
 	// видалення елементів
-	v.erase(v.begin() + 3, v.end() - 4);
-	
+	v.erase(v.begin());		// видалити перший
+	v.erase(v.end() - 1);	// видалити останній
+
+	v.erase(v.begin() + 2, v.end() - 2);
+
 	// вставка елементів
 	v.insert(v.end(), 77);
 	v.insert(v.begin(), 5, 10);
 	v.insert(v.begin(), v2.begin(), v2.begin() + 2);
-	
+
 	// доступ до елемента по індексу
 	v[0] = 999;
 
