@@ -31,7 +31,7 @@ int main()
 	//string eight(four, 7, 16);					// ctor #7
 	//cout << eight << " in motion!" << endl;
 
-	//for (char i : one)
+	//for (char i : one) // for (auto i = one.begin(); i != one.end(); i++)
 	//{
 	//	cout << i;
 	//}
@@ -41,22 +41,22 @@ int main()
 
 	// Create strings
 	const char c_str[] = "Hello";
-	string str = "hello, worldo!";
+	string str = "hello, world!";
 	string str2 = "world";
 
-	// ----- Capacity -----	
+	//// ----- Capacity -----	
 
-	// Size of allocated storage
-	cout << "Capacity: " << str.capacity() << endl;
-	// Length of string
-	cout << "Size/length: " << str.size() << " = " << str.length() << endl;
+	//// Size of allocated storage
+	//cout << "Capacity: " << str.capacity() << endl;
+	//// Length of string
+	//cout << "Size/length: " << str.size() << " = " << str.length() << endl;
 
-	// Test if string is empty
-	if (str.empty())
-		cout << "String is empty!" << endl;
-	
-	// Clear string
+	//// Clear string
 	//str.clear();
+
+	//// Test if string is empty
+	//if (str.empty())
+	//	cout << "String is empty!" << endl;
 
 	// ----- Element access -----	
 
@@ -100,16 +100,16 @@ int main()
 	//cout << str << endl;
 	//cin.get();
 
-	//// Erase characters from string
-	//str.erase(str.begin() + 1, str.end());
-	//str.erase(1, 3);
-	//str.erase(3);
-	//str.erase();
+	// Erase characters from string
+	/*str.erase(str.begin() + 1, str.end());
+	str.erase(1, 3);
+	str.erase(3);
+	str.erase();*/
 
 	// Replace portion of string
 	// "yesae ighaeri bla aerhgiuae"
-	str.replace(0, 5, "yes");
-	cout << str << endl;
+	/*str.replace(0, 5, "yes");
+	cout << str << endl;*/
 
 	// ----- String operations -----
 
@@ -118,12 +118,13 @@ int main()
 
 	cout << "Str: " << str << endl;
 	// Find content in string
-	cout << "Index of first 'o' = " << str.find('o');
+	cout << "Index of first 'o' = " << str.find('o') << endl;
+
 	if (str.find("Hello") == string::npos)
 		cout << "Not found!" << endl;
 
 	// Find last occurrence of content in string
-	cout << "Index of last 'o' = " << str.rfind('o');	
+	cout << "Index of last 'o' = " << str.rfind('o') << endl;	
 
 	// Find character in string
 	cout << "Found index: " << str.find_first_of("abcd") << endl;
@@ -137,7 +138,7 @@ int main()
 
 	// Generate substring
 	// "Hello, blabla world!"
-	cout << "Substring: " << str.substr(3, 4) << endl;
+	cout << "Substring: " << str.substr(7, 5) << endl;
 
 	std::cin.get();
 	return 0;

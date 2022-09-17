@@ -68,14 +68,17 @@ int main()
 		clients.pop();
 	}
 
-	////////////////////// Priority Queue
+	//////////////////////// Priority Queue
 	priority_queue<string> workers;
 
+	workers.push("Alex");
 	workers.push("Vitia");
 	workers.push("Kolya");
 	workers.push("Sofia");
 	workers.push("Oksana");
 	workers.push("Petro");
+
+	// element > element
 
 	cout << "First: " << workers.top() << endl;
 
@@ -102,9 +105,10 @@ int main()
 		users.pop();
 	}
 
-	///////////////////////// Dequeue
+	/////////////////////////// Dequeue
 	deque<int> deck;
 
+	// -- 2 1 10 20 --
 	deck.push_back(10);
 	deck.push_back(20);
 	deck.push_front(1);
@@ -112,7 +116,7 @@ int main()
 
 	while (!deck.empty())
 	{
-		cout << "First: " << deck.front() << endl;
+		cout << deck.front() << " ";
 		deck.pop_front();	
 	}
 
