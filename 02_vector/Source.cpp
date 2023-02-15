@@ -14,7 +14,7 @@ class Train
 	Time departureTime;
 	string destination;
 
-	// oeprator <
+	// operator <
 };
 
 class Railway
@@ -37,8 +37,10 @@ void PrintVector(vector<int> v)
 
 int main()
 {
-	vector<int> v = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+	vector<int> v = vector<int>({ 1, 2, 3, 4, 5, 6, 7, 8, 9 });
 	vector<int> v2 = { 10, 11, 12, 13 };
+
+	cout << "Vector 1 size: " << v.size() << ", capacity: " << v.capacity() << endl;
 
 	for (int i = 0; i < v.size(); i++)
 	{
@@ -51,11 +53,13 @@ int main()
 	v.erase(v.end() - 1);	// видалити останній
 
 	v.erase(v.begin() + 2, v.end() - 2);
+	PrintVector(v);
 
 	// вставка елементів
-	v.insert(v.end(), 77);
+	v.insert(v.end() - 1, 77);
 	v.insert(v.begin(), 5, 10);
 	v.insert(v.begin(), v2.begin(), v2.begin() + 2);
+	PrintVector(v);
 
 	// доступ до елемента по індексу
 	v[0] = 999;
@@ -80,9 +84,9 @@ int main()
 	
 	for (int i = 0; i < v.size(); i++)
 	{
-		if (v[i] == 7)
+		if (v[i] == 13)
 		{
-			v.insert(v.begin() + i + 1, 77);
+			v.insert(v.begin() + i + 1, 0);
 		}
 	}
 	cout << endl;

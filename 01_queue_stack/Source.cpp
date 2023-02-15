@@ -31,6 +31,7 @@ int main()
 	plates.push("Plate 1");
 	plates.push("Plate 2");
 	plates.push("Plate 3");
+	plates.emplace(20, '#');
 
 	stack<string> articles;
 	articles.push("Article 1");
