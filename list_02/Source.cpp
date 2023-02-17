@@ -13,29 +13,41 @@ struct Book
 	string name;
 	string author;
 	int pages;
+
+	static bool CompareBookByName(const Book& b1, const Book& b2)
+	{
+		return b1.name < b2.name;
+	}
+	static bool CompareBookByAuthor(const Book& b1, const Book& b2)
+	{
+		return b1.author < b2.author;
+	}
+	static bool CompareBookByPages(const Book& b1, const Book& b2)
+	{
+		return b1.pages < b2.pages;
+	}
 };
 
-//функція порівняння елементів списку
-bool comparator(const int& a, const int& b);
-bool CompareBookByName(const Book& b1, const Book& b2);
-bool CompareBookByAuthor(const Book& b1, const Book& b2);
-bool CompareBookByPages(const Book& b1, const Book& b2);
+bool CompareByDesc(const int& num1, const int& num2)
+{
+	return num1 > num2;
+}
 
 void ShowLists(list<int>& l1, list<int>& l2)
 {
 	//створюємо ітератор 
-	list<int>::iterator iter;
+	//list<int>::iterator iter;
 	cout << "list1: ";
-	for (iter = l1.begin(); iter != l1.end(); ++iter)
+	for (auto iter = l1.begin(); iter != l1.end(); ++iter)
 	{
 		//виводимо елемент на який вказує ітератор
 		cout << *iter << " ";
 	}
 
 	cout << endl << "list2: ";
-	for (auto iter = l2.begin(); iter != l2.end(); iter++)
+	for (auto i : l2)
 	{
-		cout << *iter << " ";
+		cout << i << " ";
 	}
 	cout << endl << endl;
 }
@@ -56,7 +68,7 @@ void main()
 	//-------------------------------------
 
 	list1.assign({ 1, 2, 3 });	// заповнення списка значеннями (очищаючи перед цим існуючі елементи)
-	int& a = ++(list1.front());	// повернення посилання на останній елемент / front()
+	int& a = ++(list1.back());	// повернення посилання на останній елемент / bakc()
 	a++;
 	//--------- Print Lists ---------------
 	ShowLists(list1, list2);
@@ -131,12 +143,12 @@ void main()
 	//-------------------------------------
 
 	////////////////////// Predicates
-	list<Book> library;
-	library.assign({
-		Book { "Night", "Gogol", 786},
-		Book{ "Day", "Taras", 344 },
-		Book{ "Evening", "Franko", 545 }
-	});
+	list<Book> library 
+	{
+		Book { "Night", "Gogol", 786 },
+		Book { "Day", "Taras", 344 },
+		Book { "Evening", "Franko", 545 }
+	};
 
 	cout << "\t---------Original list: -----------\n";
 	for (Book b : library)
@@ -144,21 +156,21 @@ void main()
 		cout << b.name << " " << b.author << " " << b.pages << endl;
 	}
 
-	library.sort(CompareBookByName);
+	library.sort(Book::CompareBookByName);
 	cout << "\t---------Sorted by Name: -----------\n";
 	for (Book b : library)
 	{
 		cout << b.name << " " << b.author << " " << b.pages << endl;
 	}
 
-	library.sort(CompareBookByAuthor);
+	library.sort(Book::CompareBookByAuthor);
 	cout << "\t---------Sorted by Author: -----------\n";
 	for (Book b : library)
 	{
 		cout << b.name << " " << b.author << " " << b.pages << endl;
 	}
 
-	library.sort(CompareBookByPages);
+	library.sort(Book::CompareBookByPages);
 	cout << "\t---------Sorted by Pages: -----------\n";
 	for (Book b : library)
 	{
@@ -166,22 +178,4 @@ void main()
 	}
 
 	system("pause");
-}
-
-bool CompareBookByName(const Book& b1, const Book& b2)
-{
-	return b1.name < b2.name;
-}
-bool CompareBookByAuthor(const Book& b1, const Book& b2)
-{
-	return b1.author < b2.author;
-}
-bool CompareBookByPages(const Book& b1, const Book& b2)
-{
-	return b1.pages < b2.pages;
-}
-
-bool comparator(const int& a, const int& b)
-{
-	return a > b;
 }
