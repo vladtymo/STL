@@ -29,10 +29,6 @@ public:
 		start += step;
 		return temp;
 	}
-	bool operator()(int num)
-	{
-		return num % 2 == 0;
-	}
 };
 
 //предикат
@@ -41,9 +37,7 @@ bool IsEven(int num)
 	return num % 2 == 0;
 }
 
-int cur = 0;
-
-int GetRandomValue() 
+int GetRandomValue()
 {
 	return rand() % 100;
 }
@@ -52,26 +46,30 @@ void Show(int num)
 {
 	cout << num << " ";
 }
+
 void main()
 {
 	srand(static_cast<unsigned int>(time(nullptr)));
 
-	list<int> l = {1, 5, 3, 6, 7, 3,5, 2, 7};
-
-	vector<int> v = {5, 3, 8, 9, 4, 4, 7, 1};
-
-	cout << '\u2664' << endl;
+	list<int> l = { 1, 5, 3, 6, 7, 3,5, 2, 7 };
+	vector<int> v = { 5, 3, 8, 9, 4, 4, 7, 1 };
 
 	//v.resize(10);
-	//ValueGenerator gen;
+	ValueGenerator gen;
+	gen();
 
-	//generate(v.begin(), v.end(), ValueGenerator(6, 3));
-	//generate(v.begin(), v.end(), GetRandomValue);
+	cout << "------------- generate() -------------\n";
+	generate(v.begin(), v.end(), GetRandomValue);
+	generate(v.begin(), v.end(), ValueGenerator(3, 4));
+
+	cout << "------------- for_each() -------------\n";
 	for_each(v.begin(), v.end(), Show);
 	cout << endl << endl;
 
+	cout << "------------- sort() -------------\n";
 	sort(v.begin(), v.end());
 	//sort(v.rbegin(), v.rend()); // by descending
+	//sort(l.begin(), l.end()); // error with sorting list
 
 	for_each(v.begin(), v.end(), Show);
 	cout << endl << endl;
@@ -81,30 +79,35 @@ void main()
 	ValueGenerator functor;
 	functor(number);*/
 
-	auto res  = find_if(v.rbegin(), v.rend(), IsEven);
-	//auto res = find_if(v.begin(), v.end(), ValueGenerator());
+	cout << "begin: " << *(v.begin()) << endl;
+	cout << "rbegin: " << *(v.rbegin()) << endl;
+
+	cout << "end: " << *(v.end() - 1) << endl;
+	cout << "rend: " << *(v.rend() - 1) << endl;
+
+	cout << "------------- find_if() -------------\n";
+	auto res = find_if(v.rbegin(), v.rend(), IsEven);
+
 	if (res != v.rend())
 		cout << "Found - " << *res << endl;
 	else
 		cout << "Not found" << endl;
 
+	cout << "------------- random_shuffle() -------------\n";
 	random_shuffle(v.begin(), v.end());
-	for_each(v.begin(), v.end(), Show); cout << endl << endl;
 
-	//generate(l.begin(), l.end(), GetRandomValue);
-	//generate(l.begin(), l.end(), ValueGenerator(3));
-	//sort(l.begin(), l.end()); // error with sorting list
-	for_each(l.begin(), l.end(), Show); 
+	for_each(l.begin(), l.end(), Show);
 	cout << endl << endl;
 
+	cout << "------------- count_if() -------------\n";
 	cout << "\nEven count: " << count_if(l.begin(), l.end(), IsEven) << endl;
 
+	cout << "------------- replace() -------------\n";
 	replace(l.begin(), l.end(), 7, 3);
 
-	for_each(l.begin(), l.end(), Show); 
+	for_each(l.begin(), l.end(), Show);
 	cout << endl << endl;
 
-	cout << endl << endl;
 	system("pause");
 }
 
