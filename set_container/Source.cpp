@@ -7,6 +7,22 @@
 #include <unordered_map>
 using namespace std;
 
+class ID
+{
+	string name;
+public:
+	ID(string name) : name(name)
+	{
+
+	}
+
+	string GetName() const { return name; }
+	bool operator < (const ID& other) const
+	{
+		return this->name < other.name;
+	}
+};
+
 int main()
 {
 	////////////////////////// map
@@ -80,6 +96,12 @@ int main()
 	set_c.clear();
 	set_c.insert({ 2, 2, 1, 1, 3, 3 });
 	for_each(set_c.begin(), set_c.end(), [](int v) {cout << v << " "; });
+	cout << endl;
+
+	set<ID> set_id;
+
+	set_id.insert({ ID("zero"), ID("first"), ID("second"), ID("zero"), ID("third")});
+	for_each(set_id.begin(), set_id.end(), [](ID v) {cout << v.GetName() << " "; });
 	cout << endl;
 
 	////////////////////////// unordered set
