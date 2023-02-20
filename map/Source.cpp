@@ -1,5 +1,6 @@
 ﻿#include <iostream>
 #include <map>
+#include <unordered_map>
 #include <string>
 #include <list>
 using namespace std;
@@ -9,11 +10,8 @@ struct ID
 	int id;
 	string name;
 
-	ID() {}
-	ID(int id, string name) : id(id), name(name)
-	{
-
-	}
+	ID() { }
+	ID(int id, string name) : id(id), name(name) { }
 
 	void Show() const
 	{
@@ -21,11 +19,39 @@ struct ID
 		cout << "Name: " << name << endl;
 	}
 
+	// for unordered_map
+	bool operator == (const ID& other) const
+	{
+		return this->name == other.name;
+	}
+
+	// for map
 	bool operator < (const ID& other) const
 	{
 		return this->name < other.name;
 	}
 };
+
+namespace std {
+
+	template <>
+	struct hash<ID>
+	{
+		std::size_t operator()(const ID& k) const
+		{
+			using std::size_t;
+			using std::hash;
+			using std::string;
+
+			// Compute individual hash values for first,
+			// second and third and combine them using XOR
+			// and bit shifting:
+
+			return ((hash<string>()(k.name)
+				^ (hash<int>()(k.id) << 1)));
+		}
+	};
+}
 
 map<string, int>::iterator findByValue(map<string, int>& m, int value)
 {	
@@ -45,6 +71,7 @@ void main()
 	map<string, int> m2;
 
 	m2.insert(pair<string, int>("Valia", 3));
+	m2.insert({ "Bob", 55 });
 	auto result = m2.insert(make_pair("Olga", 4));
 
 	// ["Valia", 3], ["Olga", 4] , ["Olga", 34] 
@@ -72,7 +99,7 @@ void main()
 
 		cout << "Key: " << it->first << " Value: " << it->second << endl;
 		it->second = 444;
-		cout << "Value after edit with iterator: " << m2["Vasia"] << endl;
+		cout << "Value after edit with iterator: " << m2["Valia"] << endl;
 	}
 
 	it = findByValue(m2, 3);
@@ -97,7 +124,7 @@ void main()
 	}
 
 	////////////////////////// map with struct
-	map<ID, int> m;
+	unordered_map<ID, int> m;
 
 	ID id1(1, "Taras");
 	pair<ID, int> pair(id1, 100);
